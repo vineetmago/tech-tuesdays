@@ -33,3 +33,17 @@ Further Work
 - Automation - Vagrant / Ansible for auto deployment
 
 
+Installatiion
+=============
+- Install Python (2.7.5)
+- Create a python virtual enironement : http://pypi.python.org/pypi/virtualenv
+- Get the code (https://github.com/vineetmago/tech-tuesdays)
+- Activate the virtual Environment and run 
+> pip install -r <project-root>/requirements.txt
+- setup seed data using 
+> python create_data.py
+- run the flask server as
+> python run.py
+- Point your browser to http://localhost:5000 click "Home / September" on the home page.
+
+Thats it !
