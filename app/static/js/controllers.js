@@ -71,7 +71,7 @@ app.controller('TalksController', function($scope, $routeParams, $http, Search) 
 		$http({
             url: '/talks/'+talkId+'/voteUp',
             method: "POST",
-            data: themeId,
+            data: talkId,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (data, status, headers, config) {
 	        	$scope.theme = data.theme;

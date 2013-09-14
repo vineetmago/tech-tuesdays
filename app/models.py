@@ -105,5 +105,5 @@ class TalkVotes(BaseModel, db.Model):
     voter = db.relationship("User")
     
     def __init__(self, talkId, userId):
-        self.theme_id = talkId
+        self.talk_id = talkId
         self.user_id = userId
