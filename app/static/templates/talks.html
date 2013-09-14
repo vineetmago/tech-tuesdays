@@ -4,11 +4,19 @@
 			<h1>Talks for {{theme.name}}</h1>
 		</div>
 	</div>
-	<div class="row-fluid" ng-repeat="talk in talks">
-		<div class="span12">
-			<h1>{{talk.name}}</h1>
-			<h2>Description</h2>
-			<p class="lead">{{talk.description}}</p>
+	<div class="row-fluid" ng-repeat="talk in talks | filter:search.text">
+		<div class="span12 well">
+			<h4>{{talk.name}}</h4>
+			<h5>Description</h5>
+			<p>{{talk.description}}</p>
+			<h5>Duration</h5>
+			<p>{{talk.duration}} Minutes</p>
+			<p>Vote Count Till Now: {{talk.voteCount}}</p>
+		</div>
+		<div class="row-fluid">
+			<div class="span12 theme-footer">
+				<a class="btn btn-primary" ng-click="voteUp(talk.id)">Vote Up</a>
+			</div>
 		</div>
 	</div>
 	<div class="row-fluid" ng-show="!talks.length">
@@ -21,29 +29,28 @@
 	</div>
 </div>
 
-<div id="talkModal" class="modal hide fade container-fluid" ng-controller="TalkFormController">
+<div id="talkModal" class="modal hide fade container-fluid">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Propose a new Talk</h3>
+    <h4>Propose a new Talk</h4>
   </div>
   <div class="modal-body row-fluid">
 		<div class="span12">
-			<form name="myForm">
+			<form name="talkForm">
 			    <label>Title</label>
 			    <input type="text" ng-model="new_talk.name" placeholder="Title of your Talk…">
 			    <span class="help-block">Give a nice and catchy name.</span>
 			    <label>Description</label>
 			    <textarea rows="3" columns="50" placeholder="Describe your talk" ng-model="new_talk.description"></textarea>
 			    <span class="help-block">Explain what are you gonna talk about, get everybody interested.</span>
-			    <label>Title</label>
-			    <input type="text" placeholder="30"  ng-model="new_talk.duration">
+			    <label>Duration</label>
+			    <input type="text" name="duration" placeholder="30" ng-model="new_talk.duration">
 			    <span class="help-block">Duration in minutes</span>
-			  </fieldset>
 			</form>
 		</div>
 	</div>
 	<div class="modal-footer">
-	   <button type="button" class="btn" ng-click="reset()">Close</button>
-	   <button type="button" class="btn btn-primary" ng-click="save(new_talk)">Save</button>
+	   <button type="button" class="btn" ng-click="reset()" data-dismiss="modal" aria-hidden="true">Close</button>
+	   <button type="button" class="btn btn-primary" ng-click="save(new_talk)" data-dismiss="modal" aria-hidden="true">Save</button>
   </div>
 </div>

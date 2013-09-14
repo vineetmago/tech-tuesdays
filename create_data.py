@@ -14,7 +14,7 @@ if __name__ == '__main__':
     db.drop_all()
     db.create_all()
     current = datetime.now().month
-    months = [Month(id=i, name=calendar.month_name[i], url="/themes/{0}".format(i))
+    months = [Month(id=i, name=calendar.month_name[i], url="/months/{0}/themes".format(i))
               for i in range(current,current+3)]
     db.session.add_all(months)
     db.session.commit()
@@ -23,10 +23,7 @@ if __name__ == '__main__':
     db.session.add(user)
     
     current_month = db.session.query(Month).filter(Month.id==current).first()
-    current_month.themes = [Theme('Javascript', 'Javascript lanugage / frameworks', user),
-                            Theme('Python', 'Python Language / frameworks', user),
-                            Theme('PHP', 'PHP Language / frameworks', user),
-                            ]
+    current_month.themes = [Theme('Javascript', 'Javascript lanugage / frameworks', 9, user)]
     
     db.session.add(current_month)
     db.session.commit()

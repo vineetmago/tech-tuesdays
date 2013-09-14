@@ -49,9 +49,10 @@ class Theme(BaseModel, db.Model):
     talks = db.relationship("Talk")
     votes = db.relationship("ThemeVotes")
     
-    def __init__(self, name, description, proposer):
+    def __init__(self, name, description, month_id, proposer):
         self.name = name
         self.description = description
+        self.month_id = month_id
         self.proposer = proposer
         
     
@@ -67,6 +68,10 @@ class ThemeVotes(BaseModel, db.Model):
     theme_id = db.Column(db.Integer, db.ForeignKey('themes.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     voter = db.relationship("User")
+    
+    def __init__(self, themeId, userId):
+        self.theme_id = themeId
+        self.user_id = userId
 
 
 class Talk(BaseModel, db.Model):
@@ -98,3 +103,7 @@ class TalkVotes(BaseModel, db.Model):
     talk_id = db.Column(db.Integer, db.ForeignKey('talks.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     voter = db.relationship("User")
+    
+    def __init__(self, talkId, userId):
+        self.theme_id = talkId
+        self.user_id = userId

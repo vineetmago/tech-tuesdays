@@ -5,7 +5,7 @@
 		</div>
 	</div>
 	<div class="row-fluid">
-		<div class="span4 block-bordered" ng-repeat="theme in themes">
+		<div class="span4 block-bordered" ng-repeat="theme in themes | filter:search.text">
 			<div class="row-fluid">
 				<div class="span12 theme-header"><h2 class="label-info text-center">{{theme.name}}</h2></div>
 			</div>
@@ -13,19 +13,45 @@
 				<div class="span12 theme-details"><h4>{{theme.description}}</h4></div>
 			</div>
 			<div class="row-fluid">
+				<div class="span12 theme-details">Votes till now: {{theme.voteCount}}</div>
+			</div>
+			<div class="row-fluid">
 				<div class="span12 theme-footer">Proposed by: {{theme.proposer}}</div>
 			</div>
 			<div class="row-fluid">
 				<div class="span12 theme-footer text-center">
-					<a class="btn btn-inverse" href="#/theme/{{theme.id}}/talks">View Talks</a>
-					<a class="btn btn-primary" href="#/theme/{{theme.id}}/voteup">Vote Up</a>
+					<a class="btn btn-inverse" href="#/themes/{{theme.id}}/talks">View Talks</a>
+					<a class="btn btn-primary" ng-click="voteUp(theme.id)">Vote Up</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row-fluid all-theme-footer">
 		<div class="span12">
-			<button class="btn btn-primary">Propose New Theme</button>
+			<button href="#themeModal" role="button" class="btn btn-primary" data-toggle="modal">Propose New Theme</button>
 		</div>
 	</div>
+</div>
+
+<div id="themeModal" class="modal hide fade container-fluid">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Propose a new Theme</h3>
+  </div>
+  <div class="modal-body row-fluid">
+		<div class="span12">
+			<form name="themeForm">
+			    <label>Title</label>
+			    <input type="text" ng-model="new_theme.name" placeholder="Name of the new theme…">
+			    <span class="help-block">Technology/Language you want to discuss </span>
+			    <label>Description</label>
+			    <textarea rows="3" columns="50" placeholder="Describe your theme" ng-model="new_theme.description"></textarea>
+			    <span class="help-block">Explain what content people can expect in this theme.</span>
+			</form>
+		</div>
+	</div>
+	<div class="modal-footer">
+	   <button type="button" class="btn" ng-click="reset()" data-dismiss="modal" aria-hidden="true">Close</button>
+	   <button type="button" class="btn btn-primary" ng-click="save(new_theme)" data-dismiss="modal" aria-hidden="true">Save</button>
+  </div>
 </div>
