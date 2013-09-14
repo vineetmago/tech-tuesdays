@@ -56,7 +56,7 @@ class Theme(BaseModel, db.Model):
         
     
     def data(self):
-        d = {k:v for k,v in self.__dict__.items() if k in ['name', 'description']}
+        d = {k:v for k,v in self.__dict__.items() if k in ['id', 'name', 'description']}
         d['proposer'] = self.proposer.name
         d['voteCount'] = len(self.votes)
         return d
@@ -69,17 +69,25 @@ class ThemeVotes(BaseModel, db.Model):
     voter = db.relationship("User")
 
 
-class Talk(Theme, db.Model):
+class Talk(BaseModel, db.Model):
     __tablename__ = 'talks'
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
+    duration = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     theme_id = db.Column(db.Integer, db.ForeignKey('themes.id'), nullable=False)
     proposer = db.relationship("User")
     votes = db.relationship("TalkVotes")
     
+    def __init__(self, name, description, duration, proposer, theme_id=None):
+        self.name = name
+        self.description = description
+        self.duration = duration
+        self.proposer = proposer
+        self.theme_id = theme_id
+    
     def data(self):
-        d = {k:v for k,v in self.__dict__.items() if k in ['name', 'description']}
+        d = {k:v for k,v in self.__dict__.items() if k in ['id', 'name', 'description', 'duration']}
         d['proposer'] = self.proposer.name
         d['voteCount'] = len(self.votes)
         return d
@@ -87,6 +95,6 @@ class Talk(Theme, db.Model):
 
 class TalkVotes(BaseModel, db.Model):
     __tablename__ = 'talk_votes'
-    talk_id = db.Column(db.Integer, db.ForeignKey('themes.id'), nullable=False)
+    talk_id = db.Column(db.Integer, db.ForeignKey('talks.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     voter = db.relationship("User")

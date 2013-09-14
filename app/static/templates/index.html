@@ -21,10 +21,10 @@
 	      <div class="nav-collapse">
 	        <ul class="nav">
 	          <li class="active">
-	          	<a href="{{months[0].url}}"><i class="icon-home icon-white"></i> {{months[0].name}}</a>
+	          	<a href="#{{months[0].url}}"><i class="icon-home icon-white"></i> {{months[0].name}}</a>
 	          	</li>
-	          <li ng-repeat="month in months"  ng-show="!$first">
-	          	<a href="/themes/{{month.id}}">{{month.name}}</a>
+	          <li ng-repeat="month in months" ng-show="!$first">
+	          	<a href="#{{month.url}}">{{month.name}}</a>
 	          </li>
 	        </ul>
 	        <form class="navbar-search pull-right" action="">
@@ -34,8 +34,11 @@
 	    </div><!-- /.container -->
 	  </div><!-- /.navbar-inner -->
 	</div><!-- /.navbar -->
-	
-	<div ng-view></div>
+	<div class="hero-unit margin">
+        <h1>Talk and Share</h1>
+        <p>Tech Tuesdays is a platform for sharing and gathering tech knowledge via short tech talks proposed and selected by members themselves.</p>
+      </div>
+	<div class="main" ng-view></div>
 	
     <script src="static/lib/jquery-1.10.2.min.js"></script>
     <script src="static/lib/bootstrap.min.js"></script>

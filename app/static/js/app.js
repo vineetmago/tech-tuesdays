@@ -1,7 +1,7 @@
 angular.module('techtuesdays', []).config(
 		['$routeProvider', function($routeProvider){
 			$routeProvider
-				.when('/themes', {templateUrl: 'themes/theme.html', controller: ThemesController})
-				.when('/theme/:themeId/talks', {templateUrl: 'talks/theme.html', controller: TalksController})
+				.when('/themes/:monthId', {templateUrl: 'static/templates/themes.html', controller: ThemesController})
+				.when('/theme/:themeId/talks', {templateUrl: 'static/templates/talks.html', controller: TalksController})
 		}]
 );

@@ -23,7 +23,10 @@ if __name__ == '__main__':
     db.session.add(user)
     
     current_month = db.session.query(Month).filter(Month.id==current).first()
-    current_month.themes = [Theme('Javacscript', 'Learn the Javscript Language', user)]
+    current_month.themes = [Theme('Javascript', 'Javascript lanugage / frameworks', user),
+                            Theme('Python', 'Python Language / frameworks', user),
+                            Theme('PHP', 'PHP Language / frameworks', user),
+                            ]
     
     db.session.add(current_month)
     db.session.commit()

@@ -1,5 +1,31 @@
 <div class="container-fluid">
 	<div class="row-fluid">
-		
+		<div class="span12">
+			<h1>Themes this month </h1>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span4 block-bordered" ng-repeat="theme in themes">
+			<div class="row-fluid">
+				<div class="span12 theme-header"><h2 class="label-info text-center">{{theme.name}}</h2></div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12 theme-details"><h4>{{theme.description}}</h4></div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12 theme-footer">Proposed by: {{theme.proposer}}</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12 theme-footer text-center">
+					<a class="btn btn-inverse" href="#/theme/{{theme.id}}/talks">View Talks</a>
+					<a class="btn btn-primary" href="#/theme/{{theme.id}}/voteup">Vote Up</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid all-theme-footer">
+		<div class="span12">
+			<button class="btn btn-primary">Propose New Theme</button>
+		</div>
 	</div>
 </div>

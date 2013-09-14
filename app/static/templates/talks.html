@@ -1,0 +1,49 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h1>Talks for {{theme.name}}</h1>
+		</div>
+	</div>
+	<div class="row-fluid" ng-repeat="talk in talks">
+		<div class="span12">
+			<h1>{{talk.name}}</h1>
+			<h2>Description</h2>
+			<p class="lead">{{talk.description}}</p>
+		</div>
+	</div>
+	<div class="row-fluid" ng-show="!talks.length">
+		<p class="lead">No Talks Created as Yet :(</p>
+	</div>
+	<div class="row-fluid all-theme-footer">
+		<div class="span12">
+			<button href="#talkModal" class="btn btn-primary" data-toggle="modal">Propose New Talk</button>
+		</div>
+	</div>
+</div>
+
+<div id="talkModal" class="modal hide fade container-fluid" ng-controller="TalkFormController">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Propose a new Talk</h3>
+  </div>
+  <div class="modal-body row-fluid">
+		<div class="span12">
+			<form name="myForm">
+			    <label>Title</label>
+			    <input type="text" ng-model="new_talk.name" placeholder="Title of your Talk…">
+			    <span class="help-block">Give a nice and catchy name.</span>
+			    <label>Description</label>
+			    <textarea rows="3" columns="50" placeholder="Describe your talk" ng-model="new_talk.description"></textarea>
+			    <span class="help-block">Explain what are you gonna talk about, get everybody interested.</span>
+			    <label>Title</label>
+			    <input type="text" placeholder="30"  ng-model="new_talk.duration">
+			    <span class="help-block">Duration in minutes</span>
+			  </fieldset>
+			</form>
+		</div>
+	</div>
+	<div class="modal-footer">
+	   <button type="button" class="btn" ng-click="reset()">Close</button>
+	   <button type="button" class="btn btn-primary" ng-click="save(new_talk)">Save</button>
+  </div>
+</div>
